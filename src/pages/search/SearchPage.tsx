@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import ProductCard from "@/components/ProductCard";
 
 interface Product {
   id: number;
@@ -57,17 +57,7 @@ function SearchPage() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {products.map((product) => (
-          <Link
-            to={`/product/${product.id}`}
-            key={product.id}
-            className="border border-peach-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow bg-white"
-          >
-            <img src={product.thumbnail} alt={product.title} className="w-full aspect-square object-cover" />
-            <div className="p-3">
-              <h3 className="font-medium text-sm truncate">{product.title}</h3>
-              <p className="text-peach-600 mt-1">${product.price}</p>
-            </div>
-          </Link>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>
