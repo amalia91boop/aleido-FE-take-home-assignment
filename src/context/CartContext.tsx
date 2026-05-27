@@ -14,6 +14,7 @@ interface CartItem extends Product {
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product) => void;
+  removeFromCart: (id: number) => void;
   totalItems: number;
 };
 
@@ -36,10 +37,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const removeFromCart = (id: number) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  }
+
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ items, addToCart, totalItems }}>
+    <CartContext.Provider value={{ items, addToCart, totalItems, removeFromCart}}>
       {children}
     </CartContext.Provider>
   );

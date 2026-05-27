@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 
 import App from "@/App";
-import AssignmentBriefPage from "@/pages/assignmentBrief/AssignmentBriefPage";
 import HomePage from "@/pages/home/HomePage";
 import SearchPage from "@/pages/search/SearchPage";
 import ProductPage from "@/pages/product/ProductPage";
@@ -14,10 +13,6 @@ const routesConfig = [
     children: [
       {
         index: true,
-        element: <AssignmentBriefPage />,
-      },
-      {
-        path: "home",
         element: <HomePage />,
       },
       {
