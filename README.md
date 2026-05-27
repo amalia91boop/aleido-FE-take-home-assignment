@@ -3,51 +3,36 @@
 Build a small webshop experience with **React** and **Vite** using the
 [DummyJSON products API](https://dummyjson.com/docs/products).
 
-## The task
-
-Create a small product experience that includes:
-
-1. a **start page**
-2. a **search page**
-3. a **product page**
-4. a simple **cart** where a user can add a product
-
-## Expectations
-
-- Use this repository as your starting point.
-- React, Vite, and TypeScript are included in the starter setup.
-- `react-router` is installed, with a single `/` route already wired up.
-- No additional styling, component, or data packages are included by default.
-- Use the DummyJSON products API as your data source.
-- Make your own choices for routing, state management, styling, and structure.
-- Focus on clear fundamentals, sound engineering decisions, and reasonable tradeoffs over feature volume.
-
-## What matters most
-
-- How you approach the problem and break it down.
-- How you justify the packages, patterns, and abstractions you choose.
-- How you communicate tradeoffs, assumptions, and next steps.
-- How you balance simplicity, readability, and product thinking.
-
-This is meant to create a good follow-up conversation, not to optimize for a perfectly finished solution.
-
-## Timebox
-
-Aim to spend around **2-4 hours** on this assignment. With solid package choices
-and AI assistance, that should be enough to show your approach. A well-reasoned,
-incomplete solution is better than an overbuilt one.
-
-## Submission
-
-- Keep your commit history.
-- Update this README with any setup instructions that differ from the default.
-- Add a short note describing your main technical decisions, tradeoffs, and what you would do next with more time.
-- If you used AI tools, briefly describe how you used them.
-
-## Getting started
+## Setup
 
 ```bash
 npm install
-npm run tsc
 npm run dev
 ```
+
+## Technical decisions
+
+### Routing
+React Router was already included in the starter repo and is the industry standard for routing in React. No need to use something else.I used it fully — `Link` for semantic navigation, `useParams` for dynamic product routes, and `useLocation` for active link state in the navbar.
+
+### State management
+I chose React Context for the cart since it's built into React and sufficient for this scope. The cart needs to be accessible across multiple pages (product page, cart page, navbar) which Context solves without adding an external dependency like Redux Toolkit or similar.
+
+### Styling
+I chose Tailwind CSS since I thought it would be fun and fast. I defined a custom peach color theme using `@theme` directive in `index.css`, available globally across all components.
+
+### Component structure
+Pages are organized as feature folders under `src/pages/`. I created a reusable `ProductCard` component used on both the home and search pages to avoid duplication and make the code cleaner. The cart logic lives in `src/context/CartContext.tsx`.
+
+### Data fetching
+Used native `fetch` directly since the API needs are simple. Each page handles its own loading and error state. 
+
+## Tradeoffs & next steps
+- Cart state is lost on page refresh — localStorage could be used to save items if refreshed or closed.
+- Debounced live search would improve user experience on the serach page since it's used almost everywhere today.
+- No pagination on the home page, currently limited to 20 products.
+- Responsive design needs to be improved.
+- Error handling is minimal — some kind of retry logic would be an improvement.
+
+## AI usage
+Used Claude as a pair programmer throughout — for setup, boilerplate, and Tailwind styling. Technical decisions, structure, and reasoning are my own.
